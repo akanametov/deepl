@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
     name='deepl',
-    url='https://github.com/akanametov/deepl/deepl',
+    url='https://github.com/akanametov/deepl',
     author='Azamat Kanametov',
     author_email='akkanametov@gmail.com',
     # Needed to actually package something
