@@ -1,8 +1,6 @@
-# deepl
-A toy Deep Learning library based in Numpy
-PathGAN
+deepl | Deep Learning from Scratch
 ======================
-A Pytorch implementation of [**Generative Adversarial Network for Heuristics of Sampling-based Path Planning**](https://arxiv.org/pdf/2012.03490.pdf)
+A toy Deep Learning library based on Numpy
 
 ```
 deepl                 
