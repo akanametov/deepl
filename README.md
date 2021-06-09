@@ -63,7 +63,7 @@ deepl
 ### Install
 
 ```
-pip install -r requirements.txt
+!pip install git+https://github.com/akanametov/deepl.git#egg=deepl
 ```
 
 ### Usage
