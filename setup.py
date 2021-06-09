@@ -9,7 +9,7 @@ setup(
     # Needed to actually package something
     packages=['deepl'],
     # Needed for dependencies
-    install_requires=['numpy==1.18.0', 'scikit-learn==0.21.2'],
+    #install_requires=['numpy==1.18.0', 'scikit-learn==0.21.2'],
     # *strongly* suggested for sharing
     version='0.1',
     # The license can be anything you like
