@@ -69,28 +69,45 @@ pip install git+https://github.com/akanametov/deepl.git#egg=deepl
 
 ### Usage
 
+Download MNIST10(milticlass) dataset:
+```
+wget https://pjreddie.com/media/files/mnist_train.csv
+```
+Get ready dataset:
+```python
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+
+train = pd.read_csv('sample_data/mnist_train_small.csv', header=None).sample(1000)
+assert len(np.unique(train.iloc[:, 0])) == 10
+
+x = train.drop(labels=0, axis=1).to_numpy()
+y = train[0].values.copy()
+```
+Define model and Train
 ```python
 from deepl import nn
 from deepl.nn import functional as F
-from deepl.criterion import BCELoss
-from deepl.optimizer import SGD
+from deepl.criterion import CrossEntropyLoss
+from deepl.metrics import accuracy
+from deepl.optimizer import Adam
 from deepl.data import Dataset, DataLoader
 
 # define network architecture
 class CNN(nn.Network):
     def __init__(self,):
         super().__init__()
-        self.conv1 = nn.Conv2d(3, 4, kernel_size=(7,7), stride=(2,2))
+        self.conv1 = nn.Conv2d(1, 4, kernel_size=(3,3), stride=(2,2))
         self.relu1 = nn.ReLU()
-        self.conv2 = nn.Conv2d(4, 6, kernel_size=(5,5), stride=(2,2))
+        self.conv2 = nn.Conv2d(4, 6, kernel_size=(3,3), stride=(2,2))
         self.relu2 = nn.ReLU()
         self.conv3 = nn.Conv2d(6, 8, kernel_size=(3,3), stride=(2,2))
         self.relu3 = nn.ReLU()
         self.flatten = nn.Flatten()
-        self.linear1 = nn.Linear(8*6*6, 32)
+        self.linear1 = nn.Linear(8*2*2, 16)
         self.relu4 = nn.ReLU()
-        self.fc = nn.Linear(32, 2)
-        self.sigm = nn.Sigmoid()
+        self.fc = nn.Linear(16, 10)
         
     def forward(self, x): # define forward path
         
@@ -106,39 +123,37 @@ class CNN(nn.Network):
         fx = self.linear1(fx)
         fx = self.relu4(fx)
         fx = self.fc(fx)
-        fx = self.sigm(fx)
         
         return fx
-    
+
 # define your dataset
-class DogCatSet(Dataset):
+class MyDataset(Dataset):
     def __init__(self, x, y, mode='train'):
         super().__init__()
-        self.X = x
+        self.x = x
         self.y = y
         self.mode=mode
         
     def __len__(self,):
-        return len(self.X)
+        return len(self.x)
     
     def __getitem__(self, idx):
-        x = self.X[idx]
+        #print(idx)
+        xi = self.x[idx]#.iloc[idx].values
+        #print(xi.shape)
+        xi = xi.reshape(len(xi), 1, 28, 28)/255
         if self.mode=='test':
-            return x
-        y = self.y[idx].astype(int)
-        return x, y
-    
-# load your data as np.array 
-x = np.array([...]) # np.array of size (N x C x H x W) in this case
-y = np.array([...]) # np.array of size (N,)
+            return xi
+        yi = self.y[idx].astype(int)
+        return xi, yi
 
 # define loader with batch_size
-dataset = DogCatSet(x, y)
+dataset = MyDataset(x, y)
 dataloader = DataLoader(dataset, batch_size=50)
 
 # assign model, critreion and optimizer
 model = CNN()
-criterion = BCELoss()
+criterion = CrossEntropyLoss()
 optimizer = Adam(lr=0.0005)
 
 epochs=20
@@ -148,9 +163,9 @@ history={'loss':[], 'acc':[]}
 for epoch in range(epochs):
     e_loss, e_acc = 0., 0.
     for (x, y) in dataloader:
-        p = model(x).flatten()                   # obtain prediction
+        p = model(x)#.flatten()                  # obtain prediction
         loss = criterion(p, y)                   # calculate loss 
-        acc = accuracy((p > 0.5).astype(int), y) # calculate accuracy
+        acc = accuracy(np.argmax(p,axis=1), y)   # calculate accuracy
         grad = criterion.backward()              # get gradient of loss function 
         model.backward(grad)                     # backward propogate of gradient through network
         params = optimizer.step(model.parameters(), model.grads()) # calculate new parameters by optimizer
@@ -162,6 +177,30 @@ for epoch in range(epochs):
     history['loss'].append(e_loss)               # save loss value
     history['acc'].append(e_acc)                 # save accuracy value
 ```
+Results:
+```
+Epoch 1/100 | loss: 2.3440 | acc: 0.0890
+Epoch 2/100 | loss: 2.2987 | acc: 0.1170
+Epoch 3/100 | loss: 2.2781 | acc: 0.1450
+Epoch 4/100 | loss: 2.2665 | acc: 0.1230
+Epoch 5/100 | loss: 2.2548 | acc: 0.1180
+Epoch 6/100 | loss: 2.2368 | acc: 0.1240
+Epoch 7/100 | loss: 2.2104 | acc: 0.1410
+Epoch 8/100 | loss: 2.1732 | acc: 0.1920
+Epoch 9/100 | loss: 2.1234 | acc: 0.2380
+...
+Epoch 91/100 | loss: 0.7817 | acc: 0.7440
+Epoch 92/100 | loss: 0.7766 | acc: 0.7450
+Epoch 93/100 | loss: 0.7715 | acc: 0.7460
+Epoch 94/100 | loss: 0.7665 | acc: 0.7480
+Epoch 95/100 | loss: 0.7616 | acc: 0.7500
+Epoch 96/100 | loss: 0.7568 | acc: 0.7550
+Epoch 97/100 | loss: 0.7521 | acc: 0.7540
+Epoch 98/100 | loss: 0.7476 | acc: 0.7560
+Epoch 99/100 | loss: 0.7431 | acc: 0.7580
+Epoch 100/100 | loss: 0.7387 | acc: 0.7600
+```
+Not bad, taking into account that this is a multiclass classification:) 
 
 ### License
 
