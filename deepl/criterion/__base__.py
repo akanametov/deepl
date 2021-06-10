@@ -25,7 +25,7 @@ def xentropy_loss(x, y, epsilon=1e-6):
     cross-entropy loss
     """
     fx = T.softmax(x)
-    y = T.one_hot(y)
+    y = T.one_hot(y, np.max(y)+1)
     xentropy = - np.sum(y * np.log(fx+epsilon))/len(y)
     return xentropy
 
@@ -65,7 +65,7 @@ def xentropy_forward(x, y, epsilon=1e-6):
     forward pass of cross-entropy loss
     """
     fx = T.softmax(x)
-    y = T.one_hot(y)
+    y = T.one_hot(y, np.max(y)+1)
     loss = - np.sum(y * np.log(fx+epsilon))/len(y)
     return loss
 
