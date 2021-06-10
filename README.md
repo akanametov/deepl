@@ -64,7 +64,7 @@ deepl
 ### Install
 
 ```
-!pip install git+https://github.com/akanametov/deepl.git#egg=deepl
+pip install git+https://github.com/akanametov/deepl.git#egg=deepl
 ```
 
 ### Usage
