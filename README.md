@@ -175,26 +175,27 @@ for epoch in range(epochs):
 ```
 Results:
 ```
-Epoch 1/100 | loss: 2.3440 | acc: 0.0890
-Epoch 2/100 | loss: 2.2987 | acc: 0.1170
-Epoch 3/100 | loss: 2.2781 | acc: 0.1450
-Epoch 4/100 | loss: 2.2665 | acc: 0.1230
-Epoch 5/100 | loss: 2.2548 | acc: 0.1180
-Epoch 6/100 | loss: 2.2368 | acc: 0.1240
-Epoch 7/100 | loss: 2.2104 | acc: 0.1410
-Epoch 8/100 | loss: 2.1732 | acc: 0.1920
-Epoch 9/100 | loss: 2.1234 | acc: 0.2380
+Epoch 1/100 | loss: 2.3210 | acc: 0.1210
+Epoch 2/100 | loss: 2.2941 | acc: 0.1850
+Epoch 3/100 | loss: 2.2794 | acc: 0.1820
+Epoch 4/100 | loss: 2.2638 | acc: 0.1890
+Epoch 5/100 | loss: 2.2400 | acc: 0.2120
+Epoch 6/100 | loss: 2.2028 | acc: 0.2340
+Epoch 7/100 | loss: 2.1405 | acc: 0.3040
+Epoch 8/100 | loss: 2.0429 | acc: 0.3500
+Epoch 9/100 | loss: 1.9130 | acc: 0.3650
+Epoch 10/100 | loss: 1.7878 | acc: 0.3900
 ...
-Epoch 91/100 | loss: 0.7817 | acc: 0.7440
-Epoch 92/100 | loss: 0.7766 | acc: 0.7450
-Epoch 93/100 | loss: 0.7715 | acc: 0.7460
-Epoch 94/100 | loss: 0.7665 | acc: 0.7480
-Epoch 95/100 | loss: 0.7616 | acc: 0.7500
-Epoch 96/100 | loss: 0.7568 | acc: 0.7550
-Epoch 97/100 | loss: 0.7521 | acc: 0.7540
-Epoch 98/100 | loss: 0.7476 | acc: 0.7560
-Epoch 99/100 | loss: 0.7431 | acc: 0.7580
-Epoch 100/100 | loss: 0.7387 | acc: 0.7600
+Epoch 91/100 | loss: 0.6349 | acc: 0.8090
+Epoch 92/100 | loss: 0.6329 | acc: 0.8080
+Epoch 93/100 | loss: 0.6310 | acc: 0.8080
+Epoch 94/100 | loss: 0.6291 | acc: 0.8090
+Epoch 95/100 | loss: 0.6273 | acc: 0.8070
+Epoch 96/100 | loss: 0.6255 | acc: 0.8070
+Epoch 97/100 | loss: 0.6239 | acc: 0.8070
+Epoch 98/100 | loss: 0.6222 | acc: 0.8070
+Epoch 99/100 | loss: 0.6206 | acc: 0.8080
+Epoch 100/100 | loss: 0.6191 | acc: 0.8070
 ```
 Not bad, taking into account that this is a multiclass classification:) 
 
