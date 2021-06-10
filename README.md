@@ -1,6 +1,6 @@
 deepl | Deep Learning from Scratch
 ======================
-A toy Deep Learning library based on Numpy
+A Deep Learning library based on Numpy to represent some basic ideas in DL. 
 
 ```
 deepl                 
@@ -52,11 +52,12 @@ deepl
     │           └── .uniform               # uniform initialization
     │
     ├── .optimizer             # Optimizers
-    │   ├── .SGD                    # stochastic gradient descent
-    │   ├── .Momentum               # stochastic gradient descent with momentum
-    │   ├── .AdaGram                # adaptive gradient descent
-    │   ├── .RMSprop                # root mean squared propogation
-    │   └── .Adam                   # adaptive momentum
+    │   ├── .Optimizer              # base Class for optimizers
+    │   ├── .SGD                    # stochastic gradient descent optimizer
+    │   ├── .Momentum               # stochastic gradient descent with momentum optimizer
+    │   ├── .AdaGram                # adaptive gradient descent optimizer
+    │   ├── .RMSprop                # root mean squared propogation optimizer
+    │   └── .Adam                   # adaptive momentum optimizer
     │
     └── README.md
 ```
@@ -161,3 +162,7 @@ for epoch in range(epochs):
     history['loss'].append(e_loss)               # save loss value
     history['acc'].append(e_acc)                 # save accuracy value
 ```
+
+### License
+
+This project is licensed under MIT.
