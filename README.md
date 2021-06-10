@@ -69,10 +69,6 @@ pip install git+https://github.com/akanametov/deepl.git#egg=deepl
 
 ### Usage
 
-Download MNIST10(milticlass) dataset:
-```
-wget https://pjreddie.com/media/files/mnist_train.csv
-```
 Get ready dataset:
 ```python
 import numpy as np
