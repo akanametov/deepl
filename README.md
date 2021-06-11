@@ -55,7 +55,7 @@ deepl
     │   ├── .Optimizer              # base Class for optimizers
     │   ├── .SGD                    # stochastic gradient descent optimizer
     │   ├── .Momentum               # stochastic gradient descent with momentum optimizer
-    │   ├── .AdaGram                # adaptive gradient descent optimizer
+    │   ├── .AdaGrad                # adaptive gradient descent optimizer
     │   ├── .RMSprop                # root mean squared propogation optimizer
     │   └── .Adam                   # adaptive momentum optimizer
     │
@@ -159,7 +159,7 @@ history={'loss':[], 'acc':[]}
 for epoch in range(epochs):
     e_loss, e_acc = 0., 0.
     for (x, y) in dataloader:
-        p = model(x)#.flatten()                  # obtain prediction
+        p = model(x)                             # obtain prediction
         loss = criterion(p, y)                   # calculate loss 
         acc = accuracy(np.argmax(p,axis=1), y)   # calculate accuracy
         grad = criterion.backward()              # get gradient of loss function 
@@ -197,7 +197,8 @@ Epoch 98/100 | loss: 0.6222 | acc: 0.8070
 Epoch 99/100 | loss: 0.6206 | acc: 0.8080
 Epoch 100/100 | loss: 0.6191 | acc: 0.8070
 ```
-Not bad, taking into account that this is a multiclass classification:) 
+Not bad, taking into account that this is a multiclass classification:)
+See the [notebook](https://github.com/akanametov/deepl/blob/main/examples/deepl.ipynb) for details.
 
 ### License
 
